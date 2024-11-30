@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Switcher</title>
+    <style>
+        .unlist {
+            list-style-type: none;
+            padding: 0;
+        }
+        .lang li {
+            display: inline;
+            margin-right: 10px;
+        }
+        .active {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <ul class="lang unlist">
+                <li><a href="#" id="engLink" class="active underline-animation">Eng</a></li>
+                <li><a href="#" id="cnLink" class="underline-animation">CN</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <aside id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" aria-label="Logo">
+                <img src="images/logos/logo.svg" style="height: 70px;" alt="">
+                <img src="images/logo.svg" style="height: 70px;" alt="">
+            </a>
+            <a href="javascript:void(0);" role="button" id="sidebar_close">&times;</a>
+        </div>
+        <div class="sidebar-body">
+            <nav class="navbar">
+                <ul id="navList">
+                    <li><a href="index.html" data-cn="首页">Home</a></li>
+                    <li><a href="#about" data-cn="关于">About</a></li>
+                    <li><a href="#services" data-cn="服务">Services</a></li>
+                    <li><a href="#portfolio" data-cn="作品集">Portfolio</a></li>
+                    <li><a href="#testimonials" data-cn="评价">Testimonials</a></li>
+                    <li><a href="#blog" data-cn="博客">Blog</a></li>
+                    <li><a href="#contact" data-cn="联系">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <script>
+        const engLink = document.getElementById('engLink');
+        const cnLink = document.getElementById('cnLink');
+        const navList = document.getElementById('navList');
+
+        function switchLanguage(lang) {
+            const links = navList.getElementsByTagName('a');
+            for (let link of links) {
+                if (lang === 'cn') {
+                    link.textContent = link.getAttribute('data-cn');
+                } else {
+                    link.textContent = link.getAttribute('href').replace('#', '');
+                }
+            }
+            engLink.classList.toggle('active', lang === 'en');
+            cnLink.classList.toggle('active', lang === 'cn');
+        }
+
+        engLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchLanguage('en');
+        });
+
+        cnLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchLanguage('cn');
+        });
+    </script>
+</body>
+</html>
